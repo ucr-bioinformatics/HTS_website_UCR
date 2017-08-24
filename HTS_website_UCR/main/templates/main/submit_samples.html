@@ -1,0 +1,28 @@
+{% extends "main/header.html" %}
+{% block content %}
+<h2>Sample Submission</h2>
+
+<b>How to Submit Samples?
+</b>
+<p>Please follow the following steps to submit libraries for HT sequencing:
+</p>
+
+<ol>
+<li><b>Planning Meeting:</b> <p>Before submitting a new project through the online system, we strongly recommend users to discuss every project in a meeting with our deep sequencing staff. The purpose of these planning meetings is to determine the best sequencing and analysis strategy for each project. In addition, the sequencing schedule can be discussed during this meeting.
+</li>
+
+<li><b>Sample Registration:</b> <p>Before providing new samples to the sequencing staff, users should complete the Sequencing Sample Submission Form for all their samples. This form is only accessible to registered users. To generate a new user account, please contact our programmer (neerja.katiyar@ucr.edu). Once an account is created, users can log into this site with the link in the upper right corner. Questions can be addressed to our staff (gencore@ucr.edu).</p>
+</li>
+
+<li><b>Sample Delivery:</b> <p>To drop off your sequencing samples, please arrange a meeting with the deep sequencing staff. During this meeting the sequencing staff will confirm the proper annotation of the sequencing material in the online submission system and the proper labeling of the delivered samples. As a quality control step, Illumina recommends that prior to submission of samples users should examine the average length of their libraries by either gel electrophoresis, or preferably via the Agilent Bioanalyzer which is available in the Genomics Core. The results should be discussed with the deep sequencing staff at the time of submission.</p>
+</li>
+</ol>
+
+<h2><b>Data Download</b></h2>
+<p>Registered users can download their sequencing data from the Projects and Flowcells page. The default download options include the raw sequences, their quality scores and a detailed QC report of the entire sequencing run. More detailed information about data formats and analysis options can be found on the Data Analysis page.</p>
+ 
+<h2><b>Pricing</b></h2>
+<p>Detailed information about the pricing of the different sequencing and data analysis services is available on the Rates page.
+</p>
+{% include 'main/includes/htmlsnippet.html' %}
+{% endblock %}

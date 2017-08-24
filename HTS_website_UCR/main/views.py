@@ -13,6 +13,12 @@ def index(request):
 def contact(request):
     return render(request, 'main/basic.html',{'content':['If you would like to contact me, please email me.’,’neerjabiotech@gmail.com']})
 
+def news(request):
+    return render(request, 'main/news.html')
+
+def submit_samples(request):
+    return render(request, 'main/submit_samples.html')
+
 def projects_flowcells(request):
     return render(request, 'main/projects_and_flowcells.html')
     
