@@ -1,0 +1,80 @@
+{% extends "main/header.html" %}
+{% block content %}	
+<form action="" method="post">
+    {% csrf_token %}
+    <h3>Sequencing Sample Submission Form</h3>
+    
+    <button onclick="mynewFunction(this)">Try it...</button>
+    <div id="mynewDIV">
+	This is my DIV element.....
+	</div>
+
+
+    <table>
+    {{ form }}
+    </table>
+    <p> Sample Information (Click + to enter data for each sample). Please note that all fields are mandatory. Sample</p>
+    <table>
+    
+    
+    <div id="sections">
+    <button onclick="toggleNavPanel('sections_panel')">Navigator</button>
+    </div>
+    <div id="sections_panel">
+    <div>
+    </div>
+    
+	<div style= "display: none">
+	
+	
+	
+	
+	<a id="Sample" href="javascript:toggle();">+</a>show
+	<div style= "display: none">
+	We are going to beach</div>
+	
+	<button onclick="myFunction()">Click Me</button>
+	<div id="myDIV">
+	<div style= "display: none">
+	This is my DIV.
+	</div>
+
+    {{formset}}
+    </table>
+    <input type="submit" value="Submit" />    
+</form>
+
+<script language="javascript">
+function toggle() {
+    //var x = document.getElementById("Sample");
+    alert(x);
+    //if (x.style.display === 'none') {
+      //  x.style.display = 'block';
+    //else {
+      //  x.style.display = 'none';
+    //}
+    alert('yes');
+    
+}
+function myFunction() {
+    var x = document.getElementById('myDIV');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+
+function mynewFunction(ele) {
+    debugger;
+    //var x = document.getElementById('myDIV');
+    alert(x);
+    //if (x.style.display === 'none') {
+      //  x.style.display = 'block';
+    //} else {
+      //  x.style.display = 'none';
+    //}
+}
+
+</script>
+{% endblock %}

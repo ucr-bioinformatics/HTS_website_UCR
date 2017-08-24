@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQM Complex Demo</title>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>    
+</head>
+<body>
+    <div data-role="page" id="index">
+        <div data-theme="a" data-role="header">
+            <h3>
+                First Page
+            </h3>
+            <a href="#second" class="ui-btn-right">Next</a>
+        </div>
+
+        <div data-role="content">
+            <div id="List" data-role="collapsible-set" data-theme="b" data-content-theme="d">
+                <div id='ListItem' data-role='collapsible' data-content-theme='b' data-collapsed='true'>
+                    <h3><p>Title</p>
+                        <div id="button-set">
+                            <input type='button'  data-theme='b' value='Settings' data-mini='true' data-inline='true' data-icon='gear' data-icon-pos='top' id="show-content"/>
+                        </div>
+                    </h3>
+                    <p>CONTENT</p>
+                </div>
+            </div>
+        </div>
+
+        <div data-theme="a" data-role="footer" data-position="fixed">
+
+        </div>
+    </div>    
+</body>
+</html>

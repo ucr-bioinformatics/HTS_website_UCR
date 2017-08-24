@@ -1,0 +1,126 @@
+{% extends "main/header.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<form action="" method="post">
+    {% csrf_token %}
+    
+    <button onclick="mynewFunction()">Try it...</button>
+    <div id="mynewDIV">
+	This is my DIV element.....
+	</div>
+	
+    <h3>Sequencing Sample Submission Form</h3>
+    <table>
+    {{ form }}
+    </table>
+    <p> Sample Information (Click + to enter data for each sample). Please note that all fields are mandatory. Sample</p>
+
+
+<div class="formControls">
+      <!-- <input type="submit" value="Submit"/> -->
+     <button id="submit">Submit</button>
+</div>
+
+</form>
+</div>
+
+</body>
+</html>
+
+
+<div class="container">
+  <h2>Sample</h2>
+  <p>Click on the button to toggle between showing and hiding content.</p>
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#sample">Sample</button>
+  <div id="sample" class="collapse">
+    <table>
+	{{formset}}
+	</table>    
+  </div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+        <div class="control-group" id="fields">
+            <label class="control-label" for="field1">Nice Multiple Form Fields</label>
+            <div class="controls"> 
+                <form role="form" autocomplete="off">
+                    <div class="entry input-group col-xs-3">
+                        <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
+                    	<span class="input-group-btn">
+                            <button class="btn btn-success btn-add" type="button" data-target="tag-controls">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            <br>
+            <small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another form field :)</small>
+            </div>
+        </div>
+	</div>
+</div>
+
+</body>
+</html>
+
+<script>
+
+function(){
+
+    $(document).on('click', '.btn-add', function(e){
+
+        console.log('button clicked');
+        e.preventDefault();
+
+        var controlForm = $('.file-controls'),
+        currentEntry = $(this).parents('.entry:first'),
+        newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+        console.log(controlForm);
+        console.log(currentEntry);
+        console.log(newEntry);
+
+        newEntry.find('input').val('');
+        controlForm.find('.entry:not(:last) .btn-add')
+        .removeClass('btn-add').addClass('btn-remove')
+        .removeClass('btn-success').addClass('btn-info')
+        .html('<span class="glyphicon glyphicon-minus"></span>');
+        }).on('click', '.btn-remove', function(e)
+        {
+
+        $(this).parents('.entry:first').remove();
+
+        e.preventDefault();
+        return false;
+
+    });
+
+});
+
+function mynewFunction() {
+    debugger;
+    var x = document.getElementById('mynewDIV');
+    //alert(x);
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+</script>
+
+
+
+{% endblock %}
