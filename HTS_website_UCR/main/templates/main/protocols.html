@@ -1,0 +1,32 @@
+{% extends "main/header.html" %}
+{% block content %}
+<h2>Protocols</h2>
+
+<h3>Overview of the Illumina Sequencing Technology</h3>
+<li>Technology overview: </li> http://www.illumina.com/pages.ilmn?ID=203
+ 
+<h3>Library Synthesis</h3>
+
+<ul>
+<li><p>DNA Sample Prep Kit. This kit is used to create DNA libraries for single-read sequencing. Random, size-selected fragments are ligated to adaptors and PCR amplified for sequencing. Please refer to Preparing Samples for Sequencing Genomic DNA [pdf] for protocol.  Reagents for preparation of 10 DNA samples - $2800 (unit cost $342 per sample).</p></li>
+
+<li><p>Paired-end Sample Prep Kit. This kit is used to create DNA libraries for paired-end reads. Random, size-selected fragments are ligated to two different adaptors that serve as unique sequencing primer sites on opposite ends of the DNA fragment, enabling sequence runs from both ends of the DNA fragments. These sequences are a known distance apart greatly increasing the usefulness of the data informatically. Please refer to the Paired-End Sequencer User Guide [pdf] for protocol. Reagents for preparation of 10 DNA samples - $3600 (unit cost $396 per sample).</p></li>
+
+<li><p>ChIP Sequencing Kit. This kit prepares DNA libraries for single-sequence reads of DNA fragments resulting from chromatin immunoprecipitation (ChIP). Please refer to the Sample Preparation for ChIP -Kit Protocol (version 1.0) [pdf] for protocol. Reagents for preparation of 10 samples - $2300 (unit cost $230 per sample).</p></li>
+
+<li><p>DGE-Tag Profiling. These kits are designed to add a short tag onto restriction digested cDNA fragments. The tags enable the profiling of gene expression using a tag-counting strategy. Two kits are available for digestion utilizing different restriction enzymes. Please refer to Preparing Samples for Digital Gene Expression-Tag Profiling with NlaIII [pdf] and Digital Gene Expression-Tag Profiling with DpnII [pdf] for protocols. Reagents for 8 RNA samples) - $2200 for either kit (unit cost $275).</p></li>
+
+<li><p>DGE-small RNA Prep Kit. This kit permits the addition of adaptors to isolated small RNAs. Complementary DNA is then produced for sequencing, and (as with the other DGE kits) a tag-counting strategy is used to generate a profile of small RNA species. Please refer to Preparing Samples for Analysis of Small RNA [pdf] for protocol. Reagents for 8 RNA samples - $1800 (unit cost $225).</p></li>
+
+<b>New Documents</b>
+<ul>
+<li>MatePair_2-5kbSamplePrep_1005363_RevB.pdf</li>
+
+<li>MultiplexPE_SamplePrep_1005361_RevB.pdf</li>
+
+<li>Paired-End_Seq_SamplePrep_1005063_RevA.pdf</li>
+
+<li>mRNA-Seq_SamplePrep_1004898_RevA.pdf</li>
+
+{% include 'main/includes/htmlsnippet.html' %}
+{% endblock %}

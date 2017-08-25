@@ -19,6 +19,15 @@ def news(request):
 def submit_samples(request):
     return render(request, 'main/submit_samples.html')
 
+def protocols(request):
+    return render(request, 'main/protocols.html')
+
+def data_analysis(request):
+    return render(request, 'main/data_analysis.html')
+
+def workshops(request):
+    return render(request, 'main/workshops.html')
+
 def projects_flowcells(request):
     return render(request, 'main/projects_and_flowcells.html')
     

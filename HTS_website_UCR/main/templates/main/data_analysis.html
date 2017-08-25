@@ -1,0 +1,94 @@
+{% extends "main/header.html" %}
+{% block content %}
+<h2>Data Analysis</h2>
+
+<h3>NGS-to-Spreadsheet Analysis Service</h3>
+<p>IIGB's bioinformatics facility offers several pipelined analysis services for NGS data. The Basic Read Processing is free of charge if performed as part of the NGS sequencing service. The downstream NGS-to-Spreadsheet analysis requires an extra service charge (see below for details). The latter is currently available for standard RNA-Seq, small RNA-Seq, SNP-Seq and ChIP-Seq samples that can be mapped against well annotated reference genomes. The following data processing steps and result reporting mechanisms are included in these services. Most of them use the systemPipeR NGS workflow and report generation environment available here.</p>
+
+<h3>Basic Read Processing</h3> (free of charge as part of sequencing service)
+<ul>
+<li>Base calling and download of NGS files (FASTQ format)</li>
+<li>QC run report: provides a detailed summary of the number and quality of the sequences generated per sample in a sequencing run</li>
+<li>De-multiplexing: upon customer request, multiplexed samples can be sorted into separate FASTQ files based on their barcodes/indices.</li>
+</ul>
+ 
+<p>
+Please note, in certain cases an additional fee may apply:
+
+ If additional barcodes are submitted for demultiplexing after the data is processed.
+ If incorrect barcodes were submitted previously and new barcodes are submitted for demultiplexing.
+
+</p>
+
+<h4>NGS-to-Spreadsheet Analysis Pipelines</h4>
+RNA-Seq & small RNA-Seq (up to 10 samples for $416*)
+<ul>
+<li>Read mapping with Tophat (other aligner upon request)</li>
+<li>Generation of count table of reads overlapping with chosen annotation feature (e.g. genes, exons, intergenic regions, etc.)</li>
+<li>Read counts converted into RPKM/FPKM values</li>
+<li>Statistical identification of differentially expressed genes (DEGs) and exons (DEXs) with edgeR, DESeq or DEXSeq (requires replicates!)</li>
+<li>Output of splice junction/variant information</li>
+<li>Download of spreadsheet containing expression values, statistical analysis and GO term enrichment results</li>
+<li>Viewing of read mappings, analysis results and annotation data in IGV genome browser</li>
+<li>Detailed analysis protocol and pipeline script to rerun analysis</li>
+</ul>
+
+<b>SNP-Seq** (up to 4 samples for $520*)</b>
+<ul>
+<li>Read mapping with BWA (other aligner upon request)</li>
+<li>Variant calling: SNPs and short indels</li>
+<li>Annotation of detected variants: synonymous/non-synonymous SNPs, genomic context information (e.g. variant mapping to genes, UTRs, intergenic regions, etc.)</li>
+<li>Download of spreadsheet containing annotated variants and read/statistical support information</li>
+<li>Viewing of read mappings, analysis results and annotation data in IGV genome browser</li>
+<li>Detailed analysis protocol and pipeline script to rerun analysis</li>
+** pipeline handles short indel and EMS mutation projects
+</ul>
+
+<b>ChIP-Seq (up to 4 samples for $416*)</b>
+<ul>
+<li>Read mapping with Bowtie (other aligner upon request)</li>
+<li>Peak calling (e.g. BayesPeak or other peak callers)</li>
+<li>Annotation of peaks with genomic context information (e.g. peaks overlapping with promoters, intergenic regions, UTRs, etc.)</li>
+<li>Differential peak analysis with edgeR or DESeq (requires control and test samples with replicates)</li>
+<li>Download of spreadsheet containing annotated peaks, read coverage information and statistical analysis results</li>
+<li>Viewing of read mappings, analysis results and annotation data in IGV genome browser</li>
+<li>Detailed analysis protocol and pipeline script to rerun analysis</li>
+</ul>
+
+*The prices listed apply to NGS data sets with the number of sampels specified (e.g. 1-10 RNA-Seq samples corresponding to the same number of demultiplexed FASTQ files) having combined not more then 500 million reads. Extra charges apply to more complex data sets or to incremental experimental strategies, such as adding more samples to an analysis set over time. All prices listed are for customers from UC institutions. The rates for customer from external educational institutions are about twice the listed amount and for customers from commercial organizations it is three times the listed amount. 
+
+Customers are expected to provide a detailed outline of the design of their experiment (e.g. treatments, replicates, comparisons), and the download information for the appropriate reference genome sequence and annotation data required for these analyses. For questions please Contact Us. 
+
+<h4>Downloading Sequencing Results in Bulk</h4>
+To download all of your sequencing results in bulk, you can use wget. Most Linux distributions come with wget preinstalled, but you can install it here if you are using Windows.
+ 
+Commands
+<p>
+wget -nH --cut-dirs=1 -r -np -A 'fq.gz,fastq.gz,txt' --accept-regex '(flowcell|Undetermined)' http://illumina.bioinfo.ucr.edu/illumina_runs/$FC_ID/
+</p> 
+(where $FC_ID is your flowcell number) will download all of your FASTQ files into a folder named "$FC_ID".
+ 
+<p> 
+wget -nH --cut-dirs=1 -r -np -R 'index.html*'  http://illumina.bioinfo.ucr.edu/illumina_runs/$FC_ID/fastq_report/
+ 
+(where $FC_ID is your flowcell number) will download your FastQC report into the "$FC_ID/fastq_report" folder.
+</p> 
+ 
+wget -nH --cut-dirs=1 -r -np http://illumina.bioinfo.ucr.edu/illumina_runs/$FC_ID/qc/
+
+(where $FC_ID is your flowcell number) will download your QC report into the "$FC_ID/qc" folder.
+ 
+<p>
+Custom Data Analysis Service
+Customized data analyses are available upon request @ $52 per hour labor time. For questions please contact Contact Us.
+</p>
+
+<b>Manuals</b>
+<ul>
+<li>UCR Manual on HT-Seq Data Analysis</li>
+<li>NGS Analysis with Galaxy and IGV</li>
+<li>PacBio QC Report Guide</li>
+</ul>
+
+{% include 'main/includes/htmlsnippet.html' %}
+{% endblock %}
