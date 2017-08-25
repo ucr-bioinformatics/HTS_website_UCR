@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^contact/', views.contact, name='contact'),
     url(r'^submit_samples/', views.submit_samples, name='submit_samples'),
     url(r'^workshops/', views.workshops, name='workshops'),
+    url(r'^rates/', views.rates, name='rates'),
     url(r'^projects/',views.get_project, name='get_project'),
     url(r'^projects_and_flowcells_submit/',views.get_projects_flowcells, name='get_projects_flowcells'),
     ]

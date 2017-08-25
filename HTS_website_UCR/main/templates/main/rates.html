@@ -1,0 +1,146 @@
+{% extends "main/header.html" %}
+{% block content %}
+<h2>Rates</h2>
+
+<h3>Sequencing Rates</h3>
+ 
+Please note: Prices are provided to facilitate the planning of projects for grant applications, etc.  Also, please note that although we are trying to set our prices as low as possible for on-campus customers, this is nevertheless an expensive service.  Users of the service may be billed approximately two months after the services.  Thus, PIs must plan accordingly and set aside funds such that they are available at the time of billing.
+ 
+                                                          HiSeq2500 Pricing
+<table>
+  <tr>
+    <th>Service</th>
+    <th>Internal Rate</th>
+    <th>External Educational Rate</th>
+  </tr>
+  <tr>
+    <td>Commercial Rate High yield Single-end 50bp</td>
+    <td>1187</td>
+    <td>1329.44</td>
+    <td>1827.99</td>
+  </tr>
+  <tr>
+    <td>High yield Single-end 50bp</td>
+    <td>1187</td>
+    <td>1329.44</td>
+    <td>1827.99</td>
+  </tr>
+  <tr>
+    <td>High yield Single-end 100bp</td>
+    <td>1505</td>
+    <td>1685.60</td>
+    <td>2772.01</td>
+  </tr>
+  <tr>
+    <td>High yield Paired-end 2x50bp</td>
+    <td>1800</td>
+    <td>2016</td>
+    <td>2610.01</td>
+  </tr>
+  <tr>
+    <td>High yield Paired-end 2x100bp</td>
+    <td>2386</td>
+    <td>2672.32</td>
+    <td>3674.45</td>
+  </tr>
+  <tr>
+    <td>Rapid Paired-end 2x50bp</td>
+    <td>1954</td>
+    <td>2188.48</td>
+    <td>3009.16</td>
+  </tr>
+  <tr>
+    <td>Rapid Single-end 1x100bp</td>
+    <td>1606</td>
+    <td>1798.72</td>
+    <td>2473.24</td>
+  </tr>
+  <tr>
+    <td>Rapid Paired-end 2x50bp</td>
+    <td>3652</td>
+    <td>4090.24</td>
+    <td>5624.08</td>
+  </tr>
+
+                                                            NextSeq500 Pricing
+
+Service
+Internal Rate
+External Educational Rate
+Commercial Rate
+ High Output
+Single-end 75bp
+1856	2078.72	2858.24
+High Output
+Single-end 150bp
+3201	3585.12	4929.54
+High Output
+Paired-end 75bp
+3201	3585.12	4929.54
+High Output
+Paired-end 150bp
+4828	5407.36	7435.12
+Mid Output* 
+Single-end 150bp
+1485	1663.20	2286.90
+Mid Output*
+Paired-end 75bp
+1485	1663.20	2286.90
+Mid Output*
+Paired-end 150bp
+2139	2395.68	3294.06
+*Please note that the facility does not maintain a standing inventory of Mid Output sequencing kits due to low demand. Such projects can be subject to delays due to reagent shipment. Please notify us two weeks prior to submission of Mid Output projects to ensure that reagents are available for your run without delay. Although we may receive reagents with less lead time, please be aware that we cannot control ship or delivery dates from Illumina. 
+
+
+
+
+
+                                                                                              MiSeq Pricing
+
+Service
+Internal Rate
+External Educational Rate 
+Commercial Rate
+50bp V2 kit (50bp single-end)*
+942.75
+1055.88
+1451.83
+150bp V3 kit  (2x75bp paired-end or 150bp Single-end)
+1046	1171.52	1610.84
+300bp V2 kit (2x150bp paired-end)*
+1170.7	1311.19	1802.88
+500bp V2 kit (2x250bp paired-end)*
+1274.65	1427.61
+1962.96
+600bp V3 kit (2x300bp paired-end)
+1636	1832.32
+2519.44
+
+NOTE: V2 kits support up to 15 million reads and a maximum single read length of 250bp; V3 kits support up to 25 million reads and maximum single read length of 300bp
+
+*Please note that the facility does not maintain a standing inventory of V2 MiSeq sequencing kits due to low demand. Such projects can be subject to delays due to reagent shipment. Please notify us prior to submission of V2 projects. 
+
+Prices are per lane and include cluster generation, sequencing run, base calls, and quality control reports.
+To minimize costs for researchers, pricing per lane is based upon full occupancy of the flow cell (8 lanes) per sequencing run. As indicated on the introduction page, researchers are responsible for the costs and the preparation of libraries for sequencing.
+ 
+
+Bioinformatics Analysis
+ General Charges
+
+Sequence/Quality Control: no cost
+Online genome browser support: standard hourly rate (see below)
+Web BLAST server support: standard hourly rate (see below)
+ 
+
+Custom Data Analysis for UCR Customers
+
+$52 per hour labor time.
+ 
+
+Additional Services of the Bioinformatics Core
+
+Bioinformatics Core Recharging Rates [pdf]
+
+
+{% include 'main/includes/htmlsnippet.html' %}
+{% endblock %}

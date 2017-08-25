@@ -28,6 +28,9 @@ def data_analysis(request):
 def workshops(request):
     return render(request, 'main/workshops.html')
 
+def rates(request):
+    return render(request, 'main/rates.html')
+
 def projects_flowcells(request):
     return render(request, 'main/projects_and_flowcells.html')
     
