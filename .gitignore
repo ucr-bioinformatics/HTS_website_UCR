@@ -2,3 +2,5 @@
 .DS_Store
 *.py[co]
 __pycache__
+*.db
+env
