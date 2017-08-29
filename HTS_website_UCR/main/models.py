@@ -14,7 +14,7 @@ class project(models.Model):
     pi = models.CharField(max_length=500)
     billing_account = models.CharField(max_length=500)
     department = models.CharField(max_length=500)
-    
+
 class sample(models.Model):
 	id = models.IntegerField(primary_key=True)
 	project_id = models.IntegerField()
