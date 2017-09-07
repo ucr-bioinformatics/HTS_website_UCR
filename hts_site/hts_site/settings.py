@@ -138,7 +138,9 @@ INSTALLED_APPS = (
     'djangocms_snippet',
     'djangocms_googlemap',
     'djangocms_video',
-    'hts_site'
+    'hts_site',
+    'management',
+    'rest_framework',
 )
 
 LANGUAGES = (
