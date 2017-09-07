@@ -8,7 +8,6 @@ from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.static import serve
-from management import views
 
 admin.autodiscover()
 
@@ -17,11 +16,6 @@ urlpatterns = [
         {'sitemaps': {'cmspages': CMSSitemap}}),
     url(r'^admin/', include(admin.site.urls)),  # NOQA
 ]
-
-# Add custom flowcell-related routes here
-urlpatterns += (
-    url(r'^test/', views.test),
-)
 
 urlpatterns += (
     url(r'^', include('cms.urls')),
