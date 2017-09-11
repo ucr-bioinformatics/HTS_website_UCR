@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from management.models import Project
+from management.models import Sample
 
 
 class ProjectSerializer(serializers.Serializer):
@@ -32,3 +33,12 @@ class ProjectSerializer(serializers.Serializer):
         instance.department = validated_data.get('department', instance.department)
         instance.save()
         return instance
+
+
+class SampleSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Sample
+        fields = ('label', 'project_description', 'organism', 'sequencer', 'alignment_genome',
+                  'sample_type', 'dna_conc_ul', 'determined_by', 'dna_conc_ul', 'avg_len_lib',
+                  'sample_vol', 'read_length', 'sample_prep_kit', 'kit_other', 'index_type',
+                  'comments', 'other_variables', 'sequence_url', 'quality_url', 'status',)
