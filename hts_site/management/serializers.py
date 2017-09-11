@@ -4,10 +4,10 @@ from management.models import Project
 
 class ProjectSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=30)
-    title = serializers.TextField()
+    title = serializers.CharField()
     date = serializers.DateField()
     time = serializers.TimeField()
-    status = serializers.TextField()
+    status = serializers.CharField()
     name = serializers.CharField(max_length=100)
     email = serializers.CharField(max_length=200)
     phone = serializers.CharField(max_length=15)
