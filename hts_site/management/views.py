@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
 from management.models import Sample, Project
-from management.serializers import SampleSerializer, ProjectSerializer
+from management.serializers import SampleSerializer, ProjectSerializer, UserSerializer
 # from django.shortcuts import render
 # from cerberus import Validator
 
@@ -30,3 +30,8 @@ class SampleViewSet(viewsets.ModelViewSet):
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = UserSerializer

@@ -1,9 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 class Project(models.Model):
-    username = models.CharField(max_length=30)
+    user_id = models.ForeignKey(User, on_delete=models.PROTECT)
     title = models.TextField()
     date = models.DateField()
     time = models.TimeField()

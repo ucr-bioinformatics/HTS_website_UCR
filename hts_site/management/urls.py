@@ -1,12 +1,12 @@
 # from management import views
 from django.conf.urls import include, url
 from rest_framework import routers
-from management.views import SampleViewSet, ProjectViewSet
+from management import views
 
-# Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register(r'samples', SampleViewSet)
-router.register(r'projects', ProjectViewSet)
+router.register(r'users', views.UserViewSet)
+router.register(r'samples', views.SampleViewSet)
+router.register(r'projects', views.ProjectViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
