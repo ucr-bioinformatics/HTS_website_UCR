@@ -2,6 +2,7 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
+from management.permissions import ReadOnly
 from management.models import Sample, Project
 from django.contrib.auth.models import User
 from management.serializers import SampleSerializer, ProjectSerializer, UserSerializer
@@ -33,6 +34,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (ReadOnly,)
