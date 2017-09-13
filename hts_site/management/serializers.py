@@ -6,7 +6,9 @@ from management.models import Project, Sample
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ('username', 'first_name', 'last_name', 'email', 'groups', 'user_permissions', 'is_staff',
+                  'is_active', 'is_superuser', 'last_login', 'date_joined')
+        read_only_fields = fields
 
 
 class ProjectSerializer(serializers.ModelSerializer):
