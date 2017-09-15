@@ -16,6 +16,9 @@ class Project(models.Model):
     billing_account = models.CharField(max_length=500)
     department = models.CharField(max_length=500)
 
+    def __str__(self):
+        return self.title
+
 
 class Flowcell(models.Model):
     label = models.TextField()
@@ -24,19 +27,31 @@ class Flowcell(models.Model):
     time = models.TimeField()
     qc_url = models.TextField()
 
+    def __str__(self):
+        return self.label
+
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class Kit(models.Model):
     mid = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 
 class Index(models.Model):
     kid = models.ForeignKey(Kit, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class Sample(models.Model):
@@ -62,6 +77,9 @@ class Sample(models.Model):
     quality_url = models.TextField()
     status = models.TextField()
 
+    def __str__(self):
+        return self.label
+
 
 # Lane/Cell
 class Lane(models.Model):
@@ -70,3 +88,6 @@ class Lane(models.Model):
     # sample_id = models.ForeignKey(Sample, on_delete=models.CASCADE)
     flowcell_element_control = models.BooleanField()
     flowcell_element_concentration = models.FloatField()
+
+    def __str__(self):
+        return 'Project: {0}, Flowcell: {1}, ID: {2}'.format(self.project_id, self.flowcell_id, self.id)
