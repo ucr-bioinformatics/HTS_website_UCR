@@ -31,6 +31,12 @@ class ProjectViewSet(ModelViewSet):
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
 
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return models.Project.objects.all()
+        else:
+            return models.Project.objects.filter(user=self.request.user)
+
 
 class FlowcellViewSet(ModelViewSet):
     queryset = models.Flowcell.objects.all()
