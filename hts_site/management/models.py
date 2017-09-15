@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Project(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
     title = models.TextField()
     date = models.DateField()
     time = models.TimeField()
@@ -39,7 +39,7 @@ class Manufacturer(models.Model):
 
 
 class Kit(models.Model):
-    mid = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -47,7 +47,7 @@ class Kit(models.Model):
 
 
 class Index(models.Model):
-    kid = models.ForeignKey(Kit, on_delete=models.CASCADE)
+    kit = models.ForeignKey(Kit, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -55,7 +55,8 @@ class Index(models.Model):
 
 
 class Sample(models.Model):
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    kit = models.ForeignKey(Kit, on_delete=models.CASCADE)
     label = models.CharField(max_length=500)
     project_description = models.CharField(max_length=500)
     organism = models.CharField(max_length=500)
@@ -68,7 +69,6 @@ class Sample(models.Model):
     avg_len_lib = models.CharField(max_length=50)
     sample_vol = models.FloatField()
     read_length = models.CharField(max_length=50)
-    sample_prep_kit = models.ForeignKey(Kit, on_delete=models.CASCADE)
     kit_other = models.CharField(max_length=500)
     index_type = models.TextField()
     comments = models.TextField()
@@ -83,11 +83,11 @@ class Sample(models.Model):
 
 # Lane/Cell
 class Lane(models.Model):
-    flowcell_id = models.ForeignKey(Flowcell, on_delete=models.CASCADE)
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    flowcell = models.ForeignKey(Flowcell, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     # sample_id = models.ForeignKey(Sample, on_delete=models.CASCADE)
     flowcell_element_control = models.BooleanField()
     flowcell_element_concentration = models.FloatField()
 
     def __str__(self):
-        return 'Project: {0}, Flowcell: {1}, ID: {2}'.format(self.project_id, self.flowcell_id, self.id)
+        return 'Project: {0}, Flowcell: {1}, ID: {2}'.format(self.project, self.flowcell, self.id)

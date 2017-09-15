@@ -6,7 +6,7 @@ from management import models
 class ProjectSerializer(ModelSerializer):
     class Meta:
         model = models.Project
-        fields = ('id', 'user_id', 'title', 'date', 'time', 'status', 'name', 'email',
+        fields = ('id', 'user', 'title', 'date', 'time', 'status', 'name', 'email',
                   'phone', 'pi', 'billing_account', 'department')
 
 
@@ -25,28 +25,28 @@ class ManufacturerSerializer(ModelSerializer):
 class KitSerializer(ModelSerializer):
     class Meta:
         model = models.Kit
-        fields = ('id', 'mid', 'name')
+        fields = ('id', 'manufacturer', 'name')
 
 
 class IndexSerializer(ModelSerializer):
     class Meta:
         model = models.Index
-        fields = ('id', 'kid', 'name')
+        fields = ('id', 'kit', 'name')
 
 
 class SampleSerializer(ModelSerializer):
     class Meta:
         model = models.Sample
-        fields = ('id', 'label', 'project_description', 'organism', 'sequencer', 'alignment_genome',
+        fields = ('id', 'project', 'label', 'project_description', 'organism', 'sequencer', 'alignment_genome',
                   'sample_type', 'dna_conc_ul', 'determined_by', 'dna_conc_ul', 'avg_len_lib',
-                  'sample_vol', 'read_length', 'sample_prep_kit', 'kit_other', 'index_type',
+                  'sample_vol', 'read_length', 'kit', 'kit_other', 'index_type',
                   'comments', 'other_variables', 'sequence_url', 'quality_url', 'status',)
 
 
 class LaneSerializer(ModelSerializer):
     class Meta:
         model = models.Lane
-        fields = ('id', 'flowcell_id', 'project_id', 'flowcell_element_control', 'flowcell_element_concentration')
+        fields = ('id', 'flowcell', 'project', 'flowcell_element_control', 'flowcell_element_concentration')
 
 
 class UserSerializer(ModelSerializer):
