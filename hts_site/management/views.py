@@ -4,7 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from management import models
 from django.contrib.auth.models import User
-from management import serializers
+from management import serializers, permissions
+from rest_framework.permissions import IsAuthenticated
 # from django.shortcuts import render
 
 
@@ -25,6 +26,10 @@ def test(request):
 class ProjectViewSet(ModelViewSet):
     queryset = models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
+    permission_classes = (IsAuthenticated, permissions.IsOwnerOrAdminOrReadOnly)
+
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
 
 
 class FlowcellViewSet(ModelViewSet):
