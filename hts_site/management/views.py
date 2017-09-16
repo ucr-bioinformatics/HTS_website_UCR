@@ -1,11 +1,11 @@
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
-from management import models
 from django.contrib.auth.models import User
-from management import serializers, permissions
+from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from management import models, serializers
+from management.permissions import IsOwnerOrAdmin, IsProjectOwnerOrAdmin
 # from django.shortcuts import render
 
 
@@ -26,7 +26,7 @@ def test(request):
 class ProjectViewSet(ModelViewSet):
     queryset = models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
-    permission_classes = (IsAuthenticated, permissions.IsOwnerOrAdminOrReadOnly)
+    permission_classes = (IsAuthenticated, IsOwnerOrAdmin)
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
@@ -61,6 +61,7 @@ class IndexViewSet(ModelViewSet):
 class SampleViewSet(ModelViewSet):
     queryset = models.Sample.objects.all()
     serializer_class = serializers.SampleSerializer
+    permission_classes = (IsAuthenticated, IsProjectOwnerOrAdmin)
 
 
 class LaneViewSet(ModelViewSet):
