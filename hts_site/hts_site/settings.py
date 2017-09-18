@@ -141,6 +141,7 @@ INSTALLED_APPS = (
     'hts_site',
     'management',
     'rest_framework',
+    'django_extensions',
 )
 
 LANGUAGES = (

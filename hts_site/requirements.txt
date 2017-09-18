@@ -19,3 +19,4 @@ Pillow>=3.0
 django-sekizai>=0.9
 six
 djangorestframework==3.6.4
+django-extensions==1.9.1
