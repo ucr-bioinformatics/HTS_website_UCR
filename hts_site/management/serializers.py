@@ -17,16 +17,13 @@ class ProjectField(PrimaryKeyRelatedField):
         user = self.context['request'].user
         if user.is_staff:
             return models.Project.objects.all()
-        else:
-            return models.Project.objects.filter(user=user)
+        return models.Project.objects.filter(user=user)
 
 
 class FlowcellSerializer(ModelSerializer):
-    project = ProjectField()
-
     class Meta:
         model = models.Flowcell
-        fields = ('id', 'project', 'label', 'status', 'date', 'time', 'qc_url')
+        fields = ('id', 'label', 'status', 'date', 'time', 'qc_url')
 
 
 class ManufacturerSerializer(ModelSerializer):
@@ -58,21 +55,21 @@ class SampleSerializer(ModelSerializer):
                   'other_variables', 'sequence_url', 'quality_url', 'status',)
 
 
-class FlowcellField(PrimaryKeyRelatedField):
+class SampleField(PrimaryKeyRelatedField):
     def get_queryset(self):
         user = self.context['request'].user
         if user.is_staff:
-            return models.Flowcell.objects.all()
-        else:
-            return models.Flowcell.objects.filter(project__user=user)
+            return models.Sample.objects.all()
+        return models.Sample.objects.filter(project__user=user)
 
 
 class LaneSerializer(ModelSerializer):
-    flowcell = FlowcellField()
+    sample = SampleField()
+    user = PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = models.Lane
-        fields = ('id', 'flowcell', 'flowcell_element_control', 'flowcell_element_concentration')
+        fields = ('id', 'flowcell', 'sample', 'user', 'flowcell_element_control', 'flowcell_element_concentration')
 
 
 class UserSerializer(ModelSerializer):

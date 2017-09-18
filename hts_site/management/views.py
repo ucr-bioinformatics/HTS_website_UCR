@@ -43,6 +43,11 @@ class FlowcellViewSet(ModelViewSet):
     queryset = Flowcell.objects.all()
     serializer_class = FlowcellSerializer
 
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Flowcell.objects.all()
+        return [lane.flowcell for lane in self.request.user.lane_set.all()]
+
 
 class ManufacturerViewSet(ModelViewSet):
     queryset = Manufacturer.objects.all()
@@ -74,6 +79,14 @@ class SampleViewSet(ModelViewSet):
 class LaneViewSet(ModelViewSet):
     queryset = Lane.objects.all()
     serializer_class = LaneSerializer
+
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Lane.objects.all()
+        return Lane.objects.filter(user=self.request.user)
 
 
 class UserViewSet(ReadOnlyModelViewSet):

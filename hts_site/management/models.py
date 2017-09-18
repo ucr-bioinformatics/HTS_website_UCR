@@ -70,7 +70,7 @@ class Sample(models.Model):
     sample_vol = models.FloatField()
     read_length = models.CharField(max_length=50)
     kit_other = models.CharField(max_length=500)
-    index_type = models.TextField()
+    index_type = models.TextField()  # barcodes
     comments = models.TextField()
     other_variables = models.TextField()
     sequence_url = models.TextField()
@@ -91,4 +91,4 @@ class Lane(models.Model):
     flowcell_element_concentration = models.FloatField()
 
     def __str__(self):
-        return 'Project: {0}, Flowcell: {1}, ID: {2}'.format(self.project, self.flowcell, self.id)
+        return '<Lane>: Sample: {0}, ID: {1}'.format(self.sample, self.id)
