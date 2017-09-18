@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from django.contrib.auth.models import User
+from management.fields import ProjectField, SampleField
 from management import models
 
 
@@ -10,14 +11,6 @@ class ProjectSerializer(ModelSerializer):
         model = models.Project
         fields = ('id', 'user', 'title', 'date', 'time', 'status', 'name', 'email',
                   'phone', 'pi', 'billing_account', 'department')
-
-
-class ProjectField(PrimaryKeyRelatedField):
-    def get_queryset(self):
-        user = self.context['request'].user
-        if user.is_staff:
-            return models.Project.objects.all()
-        return models.Project.objects.filter(user=user)
 
 
 class FlowcellSerializer(ModelSerializer):
@@ -53,14 +46,6 @@ class SampleSerializer(ModelSerializer):
                   'sample_type', 'dna_conc_ul', 'determined_by', 'dna_conc_ul', 'avg_len_lib',
                   'sample_vol', 'read_length', 'kit', 'kit_other', 'index_type', 'comments',
                   'other_variables', 'sequence_url', 'quality_url', 'status',)
-
-
-class SampleField(PrimaryKeyRelatedField):
-    def get_queryset(self):
-        user = self.context['request'].user
-        if user.is_staff:
-            return models.Sample.objects.all()
-        return models.Sample.objects.filter(project__user=user)
 
 
 class LaneSerializer(ModelSerializer):

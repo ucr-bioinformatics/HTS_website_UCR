@@ -35,8 +35,7 @@ class ProjectViewSet(ModelViewSet):
     def get_queryset(self):
         if self.request.user.is_staff:
             return Project.objects.all()
-        else:
-            return Project.objects.filter(user=self.request.user)
+        return Project.objects.filter(user=self.request.user)
 
 
 class FlowcellViewSet(ModelViewSet):
@@ -46,7 +45,8 @@ class FlowcellViewSet(ModelViewSet):
     def get_queryset(self):
         if self.request.user.is_staff:
             return Flowcell.objects.all()
-        return [lane.flowcell for lane in self.request.user.lane_set.all()]
+        return [lane.flowcell for lane in
+                self.request.user.lane_set.all().select_related('flowcell')]
 
 
 class ManufacturerViewSet(ModelViewSet):
@@ -72,8 +72,7 @@ class SampleViewSet(ModelViewSet):
     def get_queryset(self):
         if self.request.user.is_staff:
             return Sample.objects.all()
-        else:
-            return Sample.objects.filter(project__user=self.request.user)
+        return Sample.objects.filter(project__user=self.request.user)
 
 
 class LaneViewSet(ModelViewSet):
