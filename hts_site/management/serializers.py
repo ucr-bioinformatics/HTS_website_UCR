@@ -1,9 +1,11 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from django.contrib.auth.models import User
 from management import models
 
 
 class ProjectSerializer(ModelSerializer):
+    user = PrimaryKeyRelatedField(read_only=True)
+
     class Meta:
         model = models.Project
         fields = ('id', 'user', 'title', 'date', 'time', 'status', 'name', 'email',
@@ -35,6 +37,16 @@ class IndexSerializer(ModelSerializer):
 
 
 class SampleSerializer(ModelSerializer):
+    class ProjectField(PrimaryKeyRelatedField):
+        def get_queryset(self):
+            user = self.context['request'].user
+            if user.is_staff:
+                return models.Projects.objects.all()
+            else:
+                return models.Project.objects.filter(user=user)
+
+    project = ProjectField()
+
     class Meta:
         model = models.Sample
         fields = ('id', 'project', 'label', 'project_description', 'organism', 'sequencer', 'alignment_genome',

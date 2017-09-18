@@ -4,7 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from management import models, serializers
+from management.serializers import *
+from management.models import *
 from management.permissions import IsOwnerOrAdmin, IsProjectOwnerOrAdmin
 # from django.shortcuts import render
 
@@ -24,8 +25,8 @@ def test(request):
 
 
 class ProjectViewSet(ModelViewSet):
-    queryset = models.Project.objects.all()
-    serializer_class = serializers.ProjectSerializer
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrAdmin)
 
     def perform_create(self, serializer):
@@ -33,42 +34,48 @@ class ProjectViewSet(ModelViewSet):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return models.Project.objects.all()
+            return Project.objects.all()
         else:
-            return models.Project.objects.filter(user=self.request.user)
+            return Project.objects.filter(user=self.request.user)
 
 
 class FlowcellViewSet(ModelViewSet):
-    queryset = models.Flowcell.objects.all()
-    serializer_class = serializers.FlowcellSerializer
+    queryset = Flowcell.objects.all()
+    serializer_class = FlowcellSerializer
 
 
 class ManufacturerViewSet(ModelViewSet):
-    queryset = models.Manufacturer.objects.all()
-    serializer_class = serializers.ManufacturerSerializer
+    queryset = Manufacturer.objects.all()
+    serializer_class = ManufacturerSerializer
 
 
 class KitViewSet(ModelViewSet):
-    queryset = models.Kit.objects.all()
-    serializer_class = serializers.KitSerializer
+    queryset = Kit.objects.all()
+    serializer_class = KitSerializer
 
 
 class IndexViewSet(ModelViewSet):
-    queryset = models.Index.objects.all()
-    serializer_class = serializers.IndexSerializer
+    queryset = Index.objects.all()
+    serializer_class = IndexSerializer
 
 
 class SampleViewSet(ModelViewSet):
-    queryset = models.Sample.objects.all()
-    serializer_class = serializers.SampleSerializer
+    queryset = Sample.objects.all()
+    serializer_class = SampleSerializer
     permission_classes = (IsAuthenticated, IsProjectOwnerOrAdmin)
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Sample.objects.all()
+        else:
+            return Sample.objects.filter(project__user=self.request.user)
 
 
 class LaneViewSet(ModelViewSet):
-    queryset = models.Lane.objects.all()
-    serializer_class = serializers.LaneSerializer
+    queryset = Lane.objects.all()
+    serializer_class = LaneSerializer
 
 
 class UserViewSet(ReadOnlyModelViewSet):
     queryset = User.objects.all()
-    serializer_class = serializers.UserSerializer
+    serializer_class = UserSerializer
