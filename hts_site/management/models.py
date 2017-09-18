@@ -85,6 +85,8 @@ class Sample(models.Model):
 class Lane(models.Model):
     flowcell = models.ForeignKey(Flowcell, on_delete=models.CASCADE)
     sample = models.ForeignKey(Sample, on_delete=models.CASCADE)
+    # user is a convenience attribute, can be obtained by going Lane -> sample -> project -> user
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
     flowcell_element_control = models.BooleanField()
     flowcell_element_concentration = models.FloatField()
 
