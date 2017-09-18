@@ -21,6 +21,7 @@ class Project(models.Model):
 
 
 class Flowcell(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     label = models.TextField()
     status = models.TextField()
     date = models.DateField()
@@ -84,7 +85,6 @@ class Sample(models.Model):
 # Lane/Cell
 class Lane(models.Model):
     flowcell = models.ForeignKey(Flowcell, on_delete=models.CASCADE)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     # sample_id = models.ForeignKey(Sample, on_delete=models.CASCADE)
     flowcell_element_control = models.BooleanField()
     flowcell_element_concentration = models.FloatField()
