@@ -41,9 +41,7 @@ class ProjectViewSet(ModelViewSet):
 
     @detail_route(methods=['get'])
     def samples(self, request, pk=None):
-        print(self.get_object())
         sample_list = Sample.objects.filter(project=self.get_object())
-        print(sample_list)
         serializer = SampleSerializer(sample_list, many=True)
         return Response(serializer.data)
 
@@ -57,6 +55,12 @@ class FlowcellViewSet(ModelViewSet):
             return Flowcell.objects.all()
         return [lane.flowcell for lane in
                 self.request.user.lane_set.all().select_related('flowcell')]
+
+    @detail_route(methods=['get'])
+    def lanes(self, request, pk=None):
+        lane_list = Lane.objects.filter(flowcell=self.get_object())
+        serializer = LaneSerializer(lane_list, many=True)
+        return Response(serializer.data)
 
 
 class ManufacturerViewSet(ModelViewSet):
@@ -96,6 +100,7 @@ class LaneViewSet(ModelViewSet):
         if self.request.user.is_staff:
             return Lane.objects.all()
         return Lane.objects.filter(user=self.request.user)
+
 
 
 class UserViewSet(ReadOnlyModelViewSet):
