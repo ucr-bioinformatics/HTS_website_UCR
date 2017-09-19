@@ -2,8 +2,10 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
+from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import detail_route
 from management.serializers import *
 from management.models import *
 from management.permissions import IsOwnerOrAdmin, IsProjectOwnerOrAdmin
@@ -36,6 +38,14 @@ class ProjectViewSet(ModelViewSet):
         if self.request.user.is_staff:
             return Project.objects.all()
         return Project.objects.filter(user=self.request.user)
+
+    @detail_route(methods=['get'])
+    def samples(self, request, pk=None):
+        print(self.get_object())
+        sample_list = Sample.objects.filter(project=self.get_object())
+        print(sample_list)
+        serializer = SampleSerializer(sample_list, many=True)
+        return Response(serializer.data)
 
 
 class FlowcellViewSet(ModelViewSet):
