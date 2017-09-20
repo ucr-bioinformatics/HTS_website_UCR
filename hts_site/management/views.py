@@ -27,12 +27,16 @@ def test(request):
 
 
 class FormViewSet(ModelViewSet):
+    name = 'Default'
     template_name = 'basic-form.html'
 
     @list_route(renderer_classes=[renderers.TemplateHTMLRenderer])
     def form(self, request, *args, **kwargs):
         serializer = self.get_serializer()
-        return Response({'serializer': serializer})
+        name = type(serializer).__name__
+        name = name[:len(name) - 10]  # Remove serializer portion from name
+        print(name)
+        return Response({'serializer': serializer, 'title': name})
 
 
 class ProjectViewSet(FormViewSet):
