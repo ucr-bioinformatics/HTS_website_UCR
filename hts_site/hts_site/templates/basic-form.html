@@ -1,0 +1,17 @@
+{% load rest_framework %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+	<form action="/submit-report/" method="post">
+	    {% csrf_token %}
+	    {% render_form serializer %}
+	    <input type="submit" value="Save" />
+	</form>
+	
+</body>
+</html>

@@ -15,4 +15,5 @@ router.register(r'lanes', views.LaneViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^test', views.test),
 ]

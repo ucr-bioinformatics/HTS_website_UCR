@@ -1,11 +1,11 @@
 import json
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import renderers
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import detail_route, list_route
 from management.serializers import *
 from management.models import *
 from management.permissions import IsOwnerOrAdmin, IsProjectOwnerOrAdmin
@@ -26,7 +26,16 @@ def test(request):
         return JsonResponse({'status': 'error'})
 
 
-class ProjectViewSet(ModelViewSet):
+class FormViewSet(ModelViewSet):
+    template_name = 'basic-form.html'
+
+    @list_route(renderer_classes=[renderers.TemplateHTMLRenderer])
+    def form(self, request, *args, **kwargs):
+        serializer = self.get_serializer()
+        return Response({'serializer': serializer})
+
+
+class ProjectViewSet(FormViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrAdmin)
@@ -39,6 +48,9 @@ class ProjectViewSet(ModelViewSet):
             return Project.objects.all()
         return Project.objects.filter(user=self.request.user)
 
+    # @list_route(methods=['get'])
+    # def get_form
+
     @detail_route(methods=['get'])
     def samples(self, request, pk=None):
         sample_list = Sample.objects.filter(project=self.get_object())
@@ -46,9 +58,11 @@ class ProjectViewSet(ModelViewSet):
         return Response(serializer.data)
 
 
-class FlowcellViewSet(ModelViewSet):
+class FlowcellViewSet(FormViewSet):
     queryset = Flowcell.objects.all()
     serializer_class = FlowcellSerializer
+    # renderer_classes = [renderers.JSONRenderer, renderers.TemplateHTMLRenderer]
+    # template_name = "test-form.html"
 
     def get_queryset(self):
         if self.request.user.is_staff:
@@ -63,22 +77,22 @@ class FlowcellViewSet(ModelViewSet):
         return Response(serializer.data)
 
 
-class ManufacturerViewSet(ModelViewSet):
+class ManufacturerViewSet(FormViewSet):
     queryset = Manufacturer.objects.all()
     serializer_class = ManufacturerSerializer
 
 
-class KitViewSet(ModelViewSet):
+class KitViewSet(FormViewSet):
     queryset = Kit.objects.all()
     serializer_class = KitSerializer
 
 
-class IndexViewSet(ModelViewSet):
+class IndexViewSet(FormViewSet):
     queryset = Index.objects.all()
     serializer_class = IndexSerializer
 
 
-class SampleViewSet(ModelViewSet):
+class SampleViewSet(FormViewSet):
     queryset = Sample.objects.all()
     serializer_class = SampleSerializer
     permission_classes = (IsAuthenticated, IsProjectOwnerOrAdmin)
@@ -89,7 +103,7 @@ class SampleViewSet(ModelViewSet):
         return Sample.objects.filter(project__user=self.request.user)
 
 
-class LaneViewSet(ModelViewSet):
+class LaneViewSet(FormViewSet):
     queryset = Lane.objects.all()
     serializer_class = LaneSerializer
 
