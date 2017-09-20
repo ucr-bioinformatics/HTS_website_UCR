@@ -2,16 +2,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>{{ title }} Form</title>
+  <meta charset="UTF-8">
+  <title>{{ title }} Form</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-	<form action="/submit-report/" method="post">
-	    {% csrf_token %}
-	    {% render_form serializer %}
-	    <input type="submit" value="Save" />
-	</form>
-	
+  <form action="../" method="post">
+      {% csrf_token %}
+      {% render_form serializer %}
+      <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script>
+  $(function() {
+    $('form').submit(function(e) {
+      e.preventDefault();
+      $.post({
+        url: '../',
+        data: $('form').serialize(),
+        success: function(data) {
+          console.log('Success:', data);
+        },
+        error: function(err) {
+          console.error('Failed:', err);
+        }
+      })
+    });
+  });
+  </script>
 </body>
 </html>
