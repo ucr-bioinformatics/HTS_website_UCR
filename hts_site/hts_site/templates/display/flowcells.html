@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Flowcells</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.0.0-beta/jq-3.2.1/jq-3.2.1/dt-1.10.16/b-1.4.2/b-html5-1.4.2/b-print-1.4.2/cr-1.4.1/datatables.min.css"/>
+</head>
+<body>
+  <table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Label</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>QC URL</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>ID</th>
+        <th>Label</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>QC URL</th>
+      </tr>
+    </tfoot>
+  </table>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.0.0-beta/jq-3.2.1/jq-3.2.1/dt-1.10.16/b-1.4.2/b-html5-1.4.2/b-print-1.4.2/cr-1.4.1/datatables.min.js"></script>
+  <script>
+  $('#example').DataTable({
+    ajax: {
+      url: '/api/flowcells',
+      dataSrc: '',
+    },
+    columns: [
+      { "data": "id" },
+      { "data": "label" },
+      { "data": "status" },
+      { "data": "date" },
+      { "data": "time" },
+      { "data": "qc_url" }
+    ],
+  });
+  </script>
+</body>
+</html>

@@ -1,5 +1,5 @@
-import json
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 from rest_framework import renderers
 from django.contrib.auth.models import User
 from rest_framework.response import Response
@@ -14,16 +14,7 @@ from management.permissions import IsOwnerOrAdmin, IsProjectOwnerOrAdmin
 
 @csrf_exempt
 def test(request):
-    try:
-        if request.method != 'POST':
-            return JsonResponse({'status': 'fail'})
-        data = json.loads(request.body.decode("utf-8"))
-        res = JsonResponse({'status': 'success', 'name': data['name']})
-        return res
-    except KeyError:
-        return JsonResponse({'status': 'fail', 'message': 'Missing field'})
-    except json.JSONDecodeError:
-        return JsonResponse({'status': 'error'})
+    return render(request, 'test.html')
 
 
 class FormViewSet(ModelViewSet):

@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'djangocms_video',
     'hts_site',
     'management',
+    'display',
     'rest_framework',
     'django_extensions',
 )

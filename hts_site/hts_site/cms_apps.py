@@ -11,4 +11,12 @@ class ManagementAppHook(CMSApp):
         return ['management.urls']
 
 
+class DisplayAppHook(CMSApp):
+    name = _('Display')
+
+    def get_urls(self, page=None, language=None, **kwargs):
+        return ['display.urls']
+
+
+apphook_pool.register(DisplayAppHook)
 apphook_pool.register(ManagementAppHook)
