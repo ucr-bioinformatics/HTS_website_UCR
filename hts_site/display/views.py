@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 
-def test(request):
-    return render(request, 'display/test.html')
+def index(request):
+    return render(request, 'display/index.html')
 
 
 def flowcells(request):
