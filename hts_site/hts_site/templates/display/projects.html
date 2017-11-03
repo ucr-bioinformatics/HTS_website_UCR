@@ -1,0 +1,51 @@
+{% extends CMS_TEMPLATE %}
+{% load cms_tags menu_tags sekizai_tags %}
+
+
+{% addtoblock "css" %}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.0.0-beta/jq-3.2.1/jq-3.2.1/dt-1.10.16/b-1.4.2/b-html5-1.4.2/b-print-1.4.2/cr-1.4.1/datatables.min.css"/>
+{% endaddtoblock %}
+
+{% block content %}
+<table id="data-table" class="display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Department</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Department</th>
+    </tr>
+  </tfoot>
+</table>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.0.0-beta/jq-3.2.1/jq-3.2.1/dt-1.10.16/b-1.4.2/b-html5-1.4.2/b-print-1.4.2/cr-1.4.1/datatables.min.js"></script>
+<script>
+$('#data-table').DataTable({
+  ajax: {
+    url: '/api/projects',
+    dataSrc: ''
+  },
+  columns: [
+    { data: 'id' },
+    { data: 'name' },
+    { data: 'title' },
+    { data: 'status' },
+    { data: 'date' },
+    { data: 'department' }
+  ]
+})
+</script>
+{% endblock content %}
