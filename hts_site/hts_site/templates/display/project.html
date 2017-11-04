@@ -1,0 +1,75 @@
+{% extends CMS_TEMPLATE %}
+{% load cms_tags menu_tags sekizai_tags %}
+
+
+
+{% block content %}
+{% if has_permission %}
+<style>
+  label {
+    font-weight: bold;
+  }
+</style>
+
+<h2>Project #{{project_id}}</h2>
+<form>
+  <div class="form-group">
+    <label for="nameInput">Name</label>
+    <input type="text" class="form-control" name="name" id="nameInput" value="{{project.name}}">
+  </div>
+  <div class="form-group">
+    <label for="emailInput">Email address</label>
+    <input type="email" class="form-control" name ="email" id="emailInput" value="{{project.email}}">
+  </div>
+  <div class="form-group">
+    <label for="titleField">Title</label>
+    <input type="text" class="form-control" name="title" id="titleField" value="{{project.title}}">
+  </div>
+  <div class="form-group">
+    <label for="phoneInput">Phone Number</label>
+    <input type="text" class="form-control" name="phone" id="phoneInput" value="{{project.phone}}">
+  </div>
+  <div class="form-group">
+    <label for="piInput">PI</label>
+    <input type="text" class="form-control" name="pi" id="piInput" value="{{project.pi}}">
+  </div>
+
+  <div class="form-group">
+    <label for="billingInput">Billing Account</label>
+    <input type="text" class="form-control" name="billing_account" id="billingInput" value="{{project.billing_account}}">
+  </div>
+
+  <div class="form-group">
+    <label for="departmentInput">Department</label>
+    <input type="text" class="form-control" name="department" id="departmentInput" value="{{project.department}}">
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Example select</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlSelect2">Example multiple select</label>
+    <select multiple class="form-control" id="exampleFormControlSelect2">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="statusArea">Status</label>
+    <textarea class="form-control" id="statusArea" rows="3">{{project.status}}</textarea>
+  </div>
+</form>
+{% else %}
+Invalid flowcell.
+{% endif %}
+{% endblock content %}
