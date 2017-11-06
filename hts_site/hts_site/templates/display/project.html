@@ -12,7 +12,7 @@
 </style>
 
 <h2>Project #{{project_id}}</h2>
-<form>
+<form id="main-form">
   <div class="form-group">
     <label for="nameInput">Name</label>
     <input type="text" class="form-control" name="name" id="nameInput" value="{{project.name}}">
@@ -64,8 +64,33 @@
     <textarea class="form-control" id="statusArea" rows="3">{{project.status}}</textarea>
   </div>
 
+  {% csrf_token %}
+
   <button type="submit" class="btn btn-primary" id="update-btn">Update</button>
 </form>
+
+{% block "js" %}
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script>
+$(function() {
+  $('#main-form').submit(function(evt) {
+    evt.preventDefault()
+    $.ajax({
+      url: '/api/projects/{{project_id}}',
+      method: 'PUT',
+      data: $('#main-form').serialize(),
+      success: function (data) {
+        console.log(data)
+      }
+    })
+  })
+})
+</script>
+{% endblock "js" %}
+
 {% else %}
 Invalid flowcell.
 {% endif %}
