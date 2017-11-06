@@ -111,7 +111,6 @@ class LaneViewSet(FormViewSet):
         return Lane.objects.filter(user=self.request.user)
 
 
-
 class UserViewSet(ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
