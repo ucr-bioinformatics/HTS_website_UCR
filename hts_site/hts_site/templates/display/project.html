@@ -1,6 +1,9 @@
 {% extends CMS_TEMPLATE %}
 {% load cms_tags menu_tags sekizai_tags %}
 
+{% block title %}
+Project #{{project_id}}
+{% endblock title %}
 
 
 {% block content %}
@@ -61,7 +64,7 @@
 
   <div class="form-group">
     <label for="statusArea">Status</label>
-    <textarea class="form-control" id="statusArea" rows="3">{{project.status}}</textarea>
+    <textarea class="form-control" name="status" id="statusArea" rows="3">{{project.status}}</textarea>
   </div>
 
   {% csrf_token %}
@@ -74,6 +77,7 @@
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.min.js"></script>
 <script>
 $(function() {
   $('#main-form').submit(function(evt) {
@@ -83,7 +87,7 @@ $(function() {
       method: 'PUT',
       data: $('#main-form').serialize(),
       success: function (data) {
-        console.log(data)
+        swal('Success', 'Project updated successfully.', 'success')
       }
     })
   })

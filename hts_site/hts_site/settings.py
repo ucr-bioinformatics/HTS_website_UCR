@@ -1,3 +1,4 @@
+from hts_site.middleware import DisableCSRF
 import os
 
 gettext = lambda s: s
@@ -109,6 +110,7 @@ MIDDLEWARE_CLASSES = (
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
+    'hts_site.middleware.DisableCSRF'
 )
 
 INSTALLED_APPS = (
