@@ -11,21 +11,19 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Name</th>
       <th>Title</th>
+      <th>User</th>
       <th>Status</th>
       <th>Date</th>
-      <th>Department</th>
     </tr>
   </thead>
   <tfoot>
     <tr>
       <th>ID</th>
-      <th>Name</th>
       <th>Title</th>
+      <th>Name</th>
       <th>Status</th>
       <th>Date</th>
-      <th>Department</th>
     </tr>
   </tfoot>
 </table>
@@ -40,11 +38,14 @@ $('#data-table').DataTable({
   },
   columns: [
     { data: 'id' },
+    { data: 'title',
+      fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+        $(nTd).html('<a href="' + window.location.pathname + '/' + oData.id + '">' + oData.title + '</a>')
+      }
+    },
     { data: 'name' },
-    { data: 'title' },
     { data: 'status' },
     { data: 'date' },
-    { data: 'department' }
   ]
 })
 </script>

@@ -20,5 +20,5 @@ def project(request, project_id):
     return render(request, 'display/project.html', {
         "project_id": project_id,
         "project": projectData,
-        "has_permission": request.user == projectData.user
+        "has_permission": request.user.is_staff or request.user == projectData.user
     })
