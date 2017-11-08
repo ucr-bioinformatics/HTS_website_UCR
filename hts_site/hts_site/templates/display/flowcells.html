@@ -15,7 +15,6 @@
       <th>Status</th>
       <th>Date</th>
       <th>Time</th>
-      <th>QC URL</th>
     </tr>
   </thead>
   <tfoot>
@@ -25,7 +24,6 @@
       <th>Status</th>
       <th>Date</th>
       <th>Time</th>
-      <th>QC URL</th>
     </tr>
   </tfoot>
 </table>
@@ -40,11 +38,14 @@ $('#data-table').DataTable({
   },
   columns: [
     { data: 'id' },
-    { data: 'label' },
+    { data: 'label',
+      fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+        $(nTd).html('<a href="' + window.location.pathname + '/' + oData.id + '">' + oData.label + '</a>')
+      }
+    },
     { data: 'status' },
     { data: 'date' },
-    { data: 'time' },
-    { data: 'qc_url' }
+    { data: 'time' }
   ]
 })
 </script>
