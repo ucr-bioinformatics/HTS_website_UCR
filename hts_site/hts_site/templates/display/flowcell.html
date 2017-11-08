@@ -1,0 +1,81 @@
+{% extends CMS_TEMPLATE %}
+{% load cms_tags menu_tags sekizai_tags %}
+
+{% block title %}
+Flowcell #{{flowcell_id}}
+{% endblock title %}
+
+
+{% block content %}
+{% if has_permission %}
+<style>
+  label {
+    font-weight: bold;
+  }
+</style>
+
+<h2>Flowcell #{{flowcell_id}}</h2>
+<form id="main-form">
+
+  <div class="form-group">
+    <label for="labelInput">Label</label>
+    <input type="text" class="form-control" name="label" id="labelInput" value="{{flowcell.label}}">
+  </div>
+
+  <div class="form-group">
+    <label for="statusInput">Status</label>
+    <input type="text" class="form-control" name="status" id="statusInput" value="{{flowcell.status}}">
+  </div>
+
+  <div class="form-group">
+    <label for="timeInput">Time</label>
+    <input type="time" class="form-control" name="time" id="timeInput" value="{{flowcell.time | time:'H:i:s'}}">
+  </div>
+
+  <div class="form-group">
+    <label for="dateInput">Date</label>
+    <input type="date" class="form-control" name="date" id="dateInput" value="{{flowcell.date | date:'Y-m-d'}}">
+  </div>
+
+  <div class="form-group">
+    <label for="statusArea">Status</label>
+    <textarea class="form-control" name="status" id="statusArea" rows="3">{{flowcell.status}}</textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="qcInput">QC URL</label>
+    <input type="text" class="form-control" name="qc_url" id="qcInput" value="{{flowcell.qc_url}}">
+  </div>
+
+  {% csrf_token %}
+
+  <button type="submit" class="btn btn-primary" id="update-btn">Update</button>
+</form>
+
+{% block "js" %}
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.min.js"></script>
+<script>
+$(function() {
+  $('#main-form').submit(function(evt) {
+    evt.preventDefault()
+    $.ajax({
+      url: '/api/flowcells/{{flowcell_id}}',
+      method: 'PUT',
+      data: $('#main-form').serialize(),
+      success: function (data) {
+        swal('Success', 'flowcell updated successfully.', 'success')
+      }
+    })
+  })
+})
+</script>
+{% endblock "js" %}
+
+{% else %}
+Invalid flowcell.
+{% endif %}
+{% endblock content %}

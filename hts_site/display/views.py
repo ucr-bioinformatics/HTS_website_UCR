@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from management.models import Project
+from management.models import Project, Flowcell
 
 
 def index(request):
@@ -21,4 +21,13 @@ def project(request, project_id):
         "project_id": project_id,
         "project": projectData,
         "has_permission": request.user.is_staff or request.user == projectData.user
+    })
+
+
+def flowcell(request, fc_id):
+    flowcellData = Flowcell.objects.get(pk=fc_id)
+    return render(request, 'display/flowcell.html', {
+        "flowcell_id": fc_id,
+        "flowcell": flowcellData,
+        "has_permission": request.user.is_staff or request.user == flowcellData.user
     })
