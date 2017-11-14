@@ -10,6 +10,7 @@ Clone the repo and `cd` into the cloned folder.
 3. Install the required dependencies using `pip -r requirements.txt`
 4. Run the database migrations for the site: `python manage.py migrate`
     - If running in production, the database settings should be changed before running this command.
+    - If running in production, **make sure you change the SECRET_KEY in `settings.py`**
 5. Start the site: `python manage.py runserver`
 
 
