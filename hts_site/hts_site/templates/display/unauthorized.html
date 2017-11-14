@@ -1,0 +1,11 @@
+{% extends CMS_TEMPLATE %}
+{% load cms_tags menu_tags sekizai_tags %}
+
+{% block title %}
+Invalid {{data_type}}
+{% endblock title %}
+
+
+{% block content %}
+{{data_type}} not found or unauthorized.
+{% endblock content %}
