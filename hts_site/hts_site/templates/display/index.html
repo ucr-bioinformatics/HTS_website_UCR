@@ -3,12 +3,8 @@
 
 
 {% block content %}
-{% if user.is_authenticated %}
 <div class="list-group">
   <a href="flowcells" class="list-group-item list-group-item-action">View Flowcells</a>
   <a href="projects" class="list-group-item list-group-item-action">View Projects</a>
 </div>
-{% else %}
-<p>To submit and view projects, samples, and flowcells, users need to have an account for this site. To generate an account, please contact the system administrator. Once an account is created, users can log into this site with the link in the upper right corner. Questions can be addressed to our staff (gencore@ucr.edu).</p>
-{% endif %}
 {% endblock content %}

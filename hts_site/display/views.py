@@ -6,7 +6,9 @@ logger = logging.getLogger('django')
 
 
 def index(request):
-    return render(request, 'display/index.html')
+    if request.user.is_authenticated():
+        return render(request, 'display/index.html')
+    return render(request, 'display/unauthenticated.html')
 
 
 def flowcells(request):
