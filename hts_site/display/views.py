@@ -26,6 +26,8 @@ def unauthorized(request, data_type):
 
 
 def project(request, project_id):
+    if not request.user.is_authenticated():
+        return unauthorized(request, 'Project')
     try:
         projectData = Project.objects.get(pk=project_id)
         # print(projectData)
@@ -40,6 +42,8 @@ def project(request, project_id):
 
 
 def flowcell(request, fc_id):
+    if not request.user.is_authenticated():
+        return unauthorized(request, 'Flowcell')
     try:
         flowcellData = Flowcell.objects.get(pk=fc_id)
         if request.user.is_staff or request.user == flowcellData.user:
