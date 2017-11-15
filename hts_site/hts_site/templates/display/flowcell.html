@@ -7,7 +7,6 @@ Flowcell #{{flowcell_id}}
 
 
 {% block content %}
-{% if has_permission %}
 <style>
   label {
     font-weight: bold;
@@ -74,8 +73,4 @@ $(function() {
 })
 </script>
 {% endblock "js" %}
-
-{% else %}
-Invalid flowcell.
-{% endif %}
 {% endblock content %}
