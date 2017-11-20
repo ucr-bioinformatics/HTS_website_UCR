@@ -11,19 +11,15 @@
   <thead>
     <tr>
       <th>ID</th>
+      <th>Label</th>
       <th>Project</th>
-      <th>User</th>
-      <th>Status</th>
-      <th>Date</th>
     </tr>
   </thead>
   <tfoot>
     <tr>
       <th>ID</th>
+      <th>Label</th>
       <th>Project</th>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Date</th>
     </tr>
   </tfoot>
 </table>
@@ -33,19 +29,17 @@
 <script>
 $('#data-table').DataTable({
   ajax: {
-    url: '/api/projects',
+    url: '/api/samples',
     dataSrc: ''
   },
   columns: [
     { data: 'id' },
-    { data: 'title',
+    { data: 'label',
       fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-        $(nTd).html('<a href="' + window.location.pathname + '/' + oData.id + '">' + oData.title + '</a>')
+        $(nTd).html('<a href="' + window.location.pathname + '/' + oData.id + '">' + oData.label + '</a>')
       }
     },
-    { data: 'name' },
-    { data: 'status' },
-    { data: 'date' }
+    { data: 'project' }
   ]
 })
 </script>

@@ -1,0 +1,76 @@
+{% extends CMS_TEMPLATE %}
+{% load cms_tags menu_tags sekizai_tags %}
+
+{% block title %}
+Sample #{{sample_id}}
+{% endblock title %}
+
+
+{% block content %}
+<style>
+  label {
+    font-weight: bold;
+  }
+</style>
+
+<h2>Sample #{{sample_id}}</h2>
+<form id="main-form">
+
+  <div class="form-group">
+    <label for="labelInput">Label</label>
+    <input type="text" class="form-control" name="label" id="labelInput" value="{{sample.label}}">
+  </div>
+
+  <div class="form-group">
+    <label for="projectInput">Project</label>
+    <input type="text" class="form-control" name="status" id="projectInput" value="{{sample.project}}">
+  </div>
+
+  <div class="form-group">
+    <label for="timeInput">Time</label>
+    <input type="time" class="form-control" name="time" id="timeInput" value="{{sample.time | time:'H:i:s'}}">
+  </div>
+
+  <div class="form-group">
+    <label for="dateInput">Date</label>
+    <input type="date" class="form-control" name="date" id="dateInput" value="{{sample.date | date:'Y-m-d'}}">
+  </div>
+
+  <div class="form-group">
+    <label for="statusArea">Status</label>
+    <textarea class="form-control" name="status" id="statusArea" rows="3">{{sample.status}}</textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="qcInput">QC URL</label>
+    <input type="text" class="form-control" name="qc_url" id="qcInput" value="{{sample.qc_url}}">
+  </div>
+
+  {% csrf_token %}
+
+  <button type="submit" class="btn btn-primary" id="update-btn">Update</button>
+</form>
+
+{% block "js" %}
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.min.js"></script>
+<script>
+$(function() {
+  $('#main-form').submit(function(evt) {
+    evt.preventDefault()
+    $.ajax({
+      url: '/api/samples/{{sample_id}}',
+      method: 'PUT',
+      data: $('#main-form').serialize(),
+      success: function (data) {
+        swal('Success', 'sample updated successfully.', 'success')
+      }
+    })
+  })
+})
+</script>
+{% endblock "js" %}
+{% endblock content %}

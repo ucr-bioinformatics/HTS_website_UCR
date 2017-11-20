@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from management.models import Project, Flowcell
+from management.models import Project, Flowcell, Sample
 import logging
 
 logger = logging.getLogger('django')
@@ -19,10 +19,30 @@ def projects(request):
     return render(request, 'display/projects.html')
 
 
+def samples(request):
+    return render(request, 'display/samples.html')
+
+
 def unauthorized(request, data_type):
     return render(request, '/display/unauthorized.html', {
         "data_type": data_type
     })
+
+
+def sample(request, sample_id):
+    if not request.user.is_authenticated():
+        return unauthorized(request, 'Sample')
+    try:
+        sampleData = Sample.objects.get(pk=sample_id)
+        # print(sampleData)
+        if request.user.is_staff or request.user == sampleData.project__user:
+            return render(request, 'display/sample.html', {
+                "sample_id": sample_id,
+                "sample": sampleData
+            })
+    except Project.DoesNotExist:
+        logger.debug('Failed request for project {}'.format(sample_id))
+    return unauthorized(request, 'Sample')
 
 
 def project(request, project_id):
