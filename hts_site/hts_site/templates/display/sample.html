@@ -23,28 +23,82 @@ Sample #{{sample_id}}
 
   <div class="form-group">
     <label for="projectInput">Project</label>
-    <input type="text" class="form-control" name="status" id="projectInput" value="{{sample.project}}">
+    <select class="form-control" name="status" id="projectSelect">
+    </select>
+  
+  <div class="form-group">
+    <label for="projectDescArea">Project Description</label>
+    <textarea class="form-control" name="project_description" id="projectDescArea" rows="3">{{sample.project_description}}</textarea>
   </div>
 
   <div class="form-group">
-    <label for="timeInput">Time</label>
-    <input type="time" class="form-control" name="time" id="timeInput" value="{{sample.time | time:'H:i:s'}}">
+    <label for="organismInput">Organism</label>
+    <input type="text" class="form-control" name="organism" id="organismInput" value="{{sample.organism}}">
   </div>
 
   <div class="form-group">
-    <label for="dateInput">Date</label>
-    <input type="date" class="form-control" name="date" id="dateInput" value="{{sample.date | date:'Y-m-d'}}">
+    <label for="sequencerInput">Sequencer</label>
+    <input type="text" class="form-control" name="sequencer" id="sequencerInput" value="{{sample.sequencer}}">
+  </div>
   </div>
 
   <div class="form-group">
-    <label for="statusArea">Status</label>
-    <textarea class="form-control" name="status" id="statusArea" rows="3">{{sample.status}}</textarea>
+    <label for="alignmentGenome">Alignment Genome</label>
+    <input type="text" class="form-control" name="alignment_genome" id="alignmentGenome" value="{{sample.alignment_genome}}">
   </div>
 
   <div class="form-group">
-    <label for="qcInput">QC URL</label>
-    <input type="text" class="form-control" name="qc_url" id="qcInput" value="{{sample.qc_url}}">
+    <label for="sampleTypeInput">Sample Type</label>
+    <input type="text" class="form-control" name="sample_type" id="sampleTypeInput" value="{{sample.sample_type}}">
   </div>
+
+  <div class="form-group">
+    <label for="dnaConcInput">DNA Concentration uL</label>
+    <input type="number" class="form-control" name="dna_conc_ul" id="dnaConcInput" value="{{sample.dna_conc_ul}}">
+  </div>
+
+  <div class="form-group">
+    <label for="determinedByInput">Determined By</label>
+    <input type="text" class="form-control" name="sample_type" id="determinedByInput" value="{{sample.determined_by}}">
+  </div>
+
+  <div class="form-group">
+    <label for="avgLenLib">Average Library Length</label>
+    <input type="text" class="form-control" name="avg_len_lib" id="avgLenLib" value="{{sample.avg_len_lib}}">
+  </div>
+
+  <div class="form-group">
+    <label for="sampleVolInput">Sample Volume</label>
+    <input type="number" class="form-control" name="sample_volume" id="sampleVolInput" value="{{sample.sample_volume}}">
+  </div>
+
+  <div class="form-group">
+    <label for="readLengthInput">Read Length</label>
+    <input type="text" class="form-control" name="read_length" id="readLengthInput" value="{{sample.read_length}}">
+  </div>
+
+  <!-- Add select for Kit here -->
+
+  <div class="form-group">
+    <label for="indexTypeInput">Index Type</label>
+    <input type="text" class="form-control" name="index_type" id="indexTypeInput" value="{{sample.index_type}}">
+  </div>
+
+  <div class="form-group">
+    <label for="commentsInput">Comments</label>
+    <input type="text" class="form-control" name="comments" id="commentsInput" value="{{sample.comments}}">
+  </div>
+
+  <div class="form-group">
+    <label for="qualityUrlInput">QC URL</label>
+    <input type="text" class="form-control" name="quality_url" id="qualityUrlInput" value="{{sample.quality_url}}">
+  </div>
+
+  <div class="form-group">
+    <label for="statusInput">Status</label>
+    <input type="text" class="form-control" name="status" id="statusInput" value="{{sample.status}}">
+  </div>
+
 
   {% csrf_token %}
 
@@ -58,7 +112,24 @@ Sample #{{sample_id}}
   crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.min.js"></script>
 <script>
+function populateProjects(cb) {
+  return $.getJSON({
+    url: '/api/projects',
+    success: cb
+  })
+}
+
 $(function() {
+  populateProjects(function(data) {
+    $('#projectSelect').html('')
+
+    for(var i = 0; i < data.length; ++i) {
+      var options = { value: data[i].id, text: data[i].title };
+      if(data[i].id == {{sample.project.id}}) options.selected = true
+      $('#projectSelect').append($('<option>', options))
+    }
+  })
+
   $('#main-form').submit(function(evt) {
     evt.preventDefault()
     $.ajax({
