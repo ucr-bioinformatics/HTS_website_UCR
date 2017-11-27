@@ -21,5 +21,6 @@ These steps are to be completed after setting up the database and the site:
 1. Make a new admin user: `python manage.py createsuperuser`
 2. Add any static pages. Note that Bootstrap tags will work and as it is already imported.
 3. Create endpoints for the Management and Api AppHooks
-    - The API endpoint should have a slug of `api`.
-    - The Management endpoint should have a slug of `view`. __[Optional, recommended]__
+    - The API endpoint (named `Management` in the UI) should have a slug of `api`.
+    - The Display endpoint should have a slug of `view`. __[Optional, recommended]__
+4. Publish the pages created in step 3 to make them visible to users.
