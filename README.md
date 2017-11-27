@@ -18,7 +18,7 @@ Clone the repo and `cd` into the cloned folder.
 
 These steps are to be completed after setting up the database and the site:
 
-1. Make new user(s) __[Optional]__
+1. Make a new admin user: `python manage.py createsuperuser`
 2. Add any static pages. Note that Bootstrap tags will work and as it is already imported.
 3. Create endpoints for the Management and Api AppHooks
     - The API endpoint should have a slug of `api`.
