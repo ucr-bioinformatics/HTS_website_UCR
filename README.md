@@ -7,7 +7,7 @@ Clone the repo and `cd` into the cloned folder.
 
 1. `cd hts_site`
 2. Create a virtualenv __[Optional, recommended]__
-3. Install the required dependencies using `pip install -r hts_site/requirements.txt`
+3. Install the required dependencies using `pip install -r requirements.txt`
 4. Run the database migrations for the site: `python manage.py migrate`
     - If running in production, the database settings should be changed before running this command.
     - If running in production, **make sure you change the SECRET_KEY in `settings.py`**
