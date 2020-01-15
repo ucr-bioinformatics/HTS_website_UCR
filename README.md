@@ -7,7 +7,12 @@ Clone the repo and `cd` into the cloned folder.
 
 1. `cd hts_site`
 2. Create a virtualenv __[Optional, recommended]__
-3. Install the required dependencies using `pip install -r requirements.txt`
+3. The `requirements.txt` file is outdated, used the following instead:
+
+   ```bash
+     pip install 'Django<1.9' 'django-cms==3.5.3' djangocms-admin-style django-treebeard 'djangocms-text-ckeditor==3.5.3' djangocms-link djangocms-style djangocms-googlemap djangocms-snippet djangocms-video 'djangocms-column==1.8.0' 'easy_thumbnails==2.5' 'django-filer==1.5.0' cmsplugin-filer pytz 'django-classy-tags==0.8.0' 'html5lib==0.9999999' Pillow 'django-sekizai==0.10.0' six 'djangorestframework==3.9.0' django-extensions 'django-mptt==0.9.0' 'django-polymorphic==1.3.1' 'django-formtools==2.1'
+     ```
+
 4. Run the database migrations for the site: `python manage.py migrate`
     - If running in production, the database settings should be changed before running this command.
     - If running in production, **make sure you change the SECRET_KEY in `settings.py`**
