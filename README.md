@@ -16,7 +16,14 @@ Clone the repo and `cd` into the cloned folder.
 4. Run the database migrations for the site: `python manage.py migrate`
     - If running in production, the database settings should be changed before running this command.
     - If running in production, **make sure you change the SECRET_KEY in `settings.py`**
-5. Start the site: `python manage.py runserver`
+
+5. I then had to upgrade to Django 1.11.0, due to LoginView/LogoutView deps
+   
+   ```bash
+   pip install 'Django==1.11.0'
+   ```
+
+6. Start the site: `python manage.py runserver`
 
 
 ## Site Setup Instructions
