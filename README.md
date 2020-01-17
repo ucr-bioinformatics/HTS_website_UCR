@@ -20,7 +20,7 @@ Clone the repo and `cd` into the cloned folder.
 5. I then had to upgrade to Django 1.11.0, due to LoginView/LogoutView deps
    
    ```bash
-   pip install 'Django==1.11.0'
+   pip install 'Django==1.11.27'
    ```
 
 6. Start the site: `python manage.py runserver`
